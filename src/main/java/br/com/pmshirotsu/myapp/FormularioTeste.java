@@ -97,7 +97,6 @@ public class FormularioTeste {
         AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        //validacoes
         //Selecionar a opção formulario e clicar
         //vai buscar qualquer elemento que possua o texto Formulario
         driver.findElement(By.xpath("//*[@text='Formulário']")).click();
@@ -115,6 +114,58 @@ public class FormularioTeste {
         //Verificar estados alterados
         Assert.assertFalse(check.getAttribute("checked").equals("false"));
         Assert.assertFalse(switc.getAttribute("checked").equals("true"));
+
+        //encerar a sessão
+        driver.quit();
+    }
+
+    @Test
+    public void deveResolverDesafio() throws MalformedURLException {
+
+        //capacidades
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        desiredCapabilities.setCapability("platformName", "Android");
+        desiredCapabilities.setCapability("deviceName", "MyApp");
+        desiredCapabilities.setCapability("automationName", "uiautomator2");
+        //instalar APK
+        desiredCapabilities.setCapability(MobileCapabilityType.APP, "/home/local/CONDUCTOR/priscila.hirotsu/Documentos/projetos/PESSOAL/myApp/src/main/resources/CTAppium_1_2.apk");
+
+        //driver de conexão e inicializar
+        AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        //Selecionar a opção formulario e clicar
+        //vai buscar qualquer elemento que possua o texto Formulario
+        driver.findElement(By.xpath("//*[@text='Formulário']")).click();
+
+        //Preencher o campo 'nome'
+        driver.findElement(By.className("android.widget.EditText")).sendKeys("Priscila Mayume");
+        //Clicar no checkbox
+        driver.findElement(By.className("android.widget.CheckBox")).click();
+        //Clicar no switch
+        driver.findElement(By.className("android.widget.Switch")).click();
+        //Clicar no combo box
+        driver.findElement(By.className("android.widget.Spinner")).click();
+        //Selecionar a opção desejada do combo box
+        driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='Nintendo Switch']")).click();
+        //Clicar em salvar
+        driver.findElement(By.xpath("//*[@text='SALVAR']")).click();
+
+        //Validações
+        MobileElement nome = driver.findElement(By.xpath("//android.widget.TextView[@text='Nome: Priscila Mayume']"));
+        Assert.assertEquals("Nome: Priscila Mayume", nome.getText());
+
+        //Encontrar algo que inicie com este valor Console: switch
+        MobileElement combo = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Console:')]"));
+        Assert.assertEquals("Console: switch", combo.getText());
+
+        MobileElement swit = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Switch:')]"));
+        //O texto que vier do switch terá que terminar com o valor 'Off'
+        Assert.assertTrue(swit.getText().endsWith("Off"));
+
+        MobileElement checkbox = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]"));
+        //O texto que vier do switch terá que terminar com o valor 'Off'
+        Assert.assertTrue(checkbox.getText().endsWith("Marcado"));
 
         //encerar a sessão
         driver.quit();
