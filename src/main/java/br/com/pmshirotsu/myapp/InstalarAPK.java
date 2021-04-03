@@ -17,7 +17,7 @@ public class InstalarAPK {
         //capacidades
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("deviceName", "aula_appium");
+        desiredCapabilities.setCapability("deviceName", "android_appium");
         desiredCapabilities.setCapability("automationName", "uiautomator2");
         //instalar APK
         desiredCapabilities.setCapability(MobileCapabilityType.APP, "/home/local/CONDUCTOR/priscila.hirotsu/Documentos/projetos/PESSOAL/myApp/src/main/resources/CTAppium_1_2.apk");
