@@ -1,7 +1,9 @@
-package br.com.pmshirotsu.myapp;
+package appium.test;
 
 import appium.core.DSL;
 import appium.core.DriverFactory;
+import appium.page.FormularioPage;
+import appium.page.MenuPage;
 import io.appium.java_client.MobileBy;
 import org.junit.After;
 import org.junit.Assert;
@@ -14,13 +16,16 @@ import static org.junit.Assert.assertTrue;
 
 
 public class FormularioTeste {
+
     private DSL dsl = new DSL();
+    private MenuPage menu = new MenuPage();
+    private FormularioPage page = new FormularioPage();
 
     @Before
     public void inicializarAppium()  {
         //Selecionar a opção formulario e clicar
         //vai buscar qualquer elemento que possua o texto Formulario
-        dsl.clicarPorTexto("Formulário");
+        menu.acessarFormulario();
 
     }
 
@@ -33,14 +38,14 @@ public class FormularioTeste {
     @Test
     public void devePreencherCampoTexto() {
         //Escrever nome
-        dsl.escrever(MobileBy.AccessibilityId("nome"), "**Priscila Mayume**");
+        page.escreverNome("**Priscila Mayume**");
 
         //Checar nome escrito
-        assertEquals("**Priscila Mayume**", dsl.obterTexto(MobileBy.AccessibilityId("nome")));
+        assertEquals("**Priscila Mayume**", page.obterNome());
 
     }
 
-    @Test
+    @Test //Parou na aula 21 - 9:21
     public void deveInteragirComCombo(){
         //Clicar no combo e Selecionar a opção desejada
         dsl.selecionarCombo(MobileBy.AccessibilityId("console"), "Nintendo Switch");
