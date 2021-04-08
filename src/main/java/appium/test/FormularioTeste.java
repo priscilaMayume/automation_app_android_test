@@ -4,12 +4,10 @@ import appium.core.DSL;
 import appium.core.DriverFactory;
 import appium.page.FormularioPage;
 import appium.page.MenuPage;
-import io.appium.java_client.MobileBy;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -45,14 +43,13 @@ public class FormularioTeste {
 
     }
 
-    @Test //Parou na aula 21 - 9:21
+    @Test
     public void deveInteragirComCombo(){
         //Clicar no combo e Selecionar a opção desejada
-        dsl.selecionarCombo(MobileBy.AccessibilityId("console"), "Nintendo Switch");
+        page.selecionarCombo("Nintendo Switch");
 
         //Verificar a opção selecionada
-        String text = dsl.obterTexto(By.xpath("//android.widget.Spinner/android.widget.TextView"));
-        assertEquals("Nintendo Switch", text);
+        assertEquals("Nintendo Switch", page.obterValorCombo());
 
     }
 
@@ -60,41 +57,41 @@ public class FormularioTeste {
     public void deveInteragirComSwitchCheckBox()  {
 
         //Verificar status dos elementos
-        Assert.assertFalse(dsl.isCheckMarcado(By.className("android.widget.CheckBox")));
-        assertTrue(dsl.isCheckMarcado(MobileBy.AccessibilityId("switch")));
+        Assert.assertFalse(page.isCheckMarcado());
+        assertTrue(page.isSwitchMarcado());
 
         //Clicar nos elementos
-        dsl.clicar(By.className("android.widget.CheckBox"));
-        dsl.clicar(MobileBy.AccessibilityId("switch"));
+        page.clicarCheck();
+        page.clicarSwitch();
 
         //Verificar estados alterados
-        assertTrue(dsl.isCheckMarcado(By.className("android.widget.CheckBox")));
-        Assert.assertFalse(dsl.isCheckMarcado(MobileBy.AccessibilityId("switch")));
+        assertTrue(page.isCheckMarcado());
+        Assert.assertFalse(page.isSwitchMarcado());
     }
 
     @Test
     public void deveRealizarCadastro()  {
         //Preencher o campo 'nome'
-        dsl.escrever(By.className("android.widget.EditText"),"Priscila Mayume");
+        page.escreverNome("Priscila Mayume");
         //Clicar no checkbox
-        dsl.clicar(By.className("android.widget.CheckBox"));
+        page.clicarCheck();
         //Clicar no switch
-        dsl.clicar(By.className("android.widget.Switch"));
+        page.clicarSwitch();
         //Clicar no combo box e na opção desejada do combo box
-        dsl.selecionarCombo(By.className("android.widget.Spinner"), "Nintendo Switch");
+        page.selecionarCombo( "Nintendo Switch");
         //Clicar em salvar
-        dsl.clicarPorTexto("SALVAR");
+        page.salvar();
 
         //Validações
-        assertEquals("Nome: Priscila Mayume", dsl.obterTexto(By.xpath("//android.widget.TextView[@text='Nome: Priscila Mayume']")));
+        assertEquals("Nome: Priscila Mayume", page.obterNomeCadastrado());
 
         //Encontrar algo que inicie com este valor Console: switch
-        assertEquals("Console: switch", dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Console:')]")));
+        assertEquals("Console: switch", page.obterConsoleCadastrado());
 
         //O texto que vier do switch terá que terminar com o valor 'Off'
-        assertTrue(dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Switch:')]")).endsWith("Off"));
+        assertTrue(page.obterCheckCadastrado().endsWith("Off"));
 
         //O texto que vier do switch terá que terminar com o valor 'Off'
-        assertTrue( dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]")).endsWith("Marcado"));
+        assertTrue(page.obterSwitchCadastrado().endsWith("Marcado"));
     }
 }
