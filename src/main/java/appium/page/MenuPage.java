@@ -1,14 +1,12 @@
 package appium.page;
 
-import appium.core.DSL;
+import appium.core.BasePage;
 
-public class MenuPage {
-
-    private DSL dsl = new DSL();
+public class MenuPage extends BasePage {
 
     public void acessarFormulario(){
         //Selecionar a opção formulario e clicar
         //vai buscar qualquer elemento que possua o texto Formulario
-        dsl.clicarPorTexto("Formulário");
+        clicarPorTexto("Formulário");
     }
 }

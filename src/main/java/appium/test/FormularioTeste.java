@@ -1,10 +1,8 @@
 package appium.test;
 
-import appium.core.DSL;
-import appium.core.DriverFactory;
+import appium.core.BaseTest;
 import appium.page.FormularioPage;
 import appium.page.MenuPage;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,9 +11,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
-public class FormularioTeste {
+public class FormularioTeste extends BaseTest {
 
-    private DSL dsl = new DSL();
     private MenuPage menu = new MenuPage();
     private FormularioPage page = new FormularioPage();
 
@@ -25,12 +22,6 @@ public class FormularioTeste {
         //vai buscar qualquer elemento que possua o texto Formulario
         menu.acessarFormulario();
 
-    }
-
-    @After
-    public void tearDown(){
-
-        DriverFactory.killDriver();
     }
 
     @Test

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import static appium.core.DriverFactory.getDriver;
 
-public class DSL {
+public class BasePage {
 
     public void escrever(By by, String texto) {
         getDriver().findElement(by).sendKeys(texto);
