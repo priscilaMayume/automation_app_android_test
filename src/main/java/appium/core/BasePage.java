@@ -1,6 +1,9 @@
 package appium.core;
 
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+
+import java.util.List;
 
 import static appium.core.DriverFactory.getDriver;
 
@@ -39,4 +42,8 @@ public class BasePage {
 
     }
 
+    public  boolean existeElementoPorTexto(String texto) {
+       List<MobileElement> elemento =  getDriver().findElements(By.xpath("//*[@text='"+texto+"']"));
+        return elemento.size() > 0;
+    }
 }

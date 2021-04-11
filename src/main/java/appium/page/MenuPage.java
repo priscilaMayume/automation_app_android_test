@@ -8,5 +8,10 @@ public class MenuPage extends BasePage {
         //Selecionar a opção formulario e clicar
         //vai buscar qualquer elemento que possua o texto Formulario
         clicarPorTexto("Formulário");
+
+    }
+
+    public void acessarSplash() {
+        clicarPorTexto("Splash");
     }
 }
