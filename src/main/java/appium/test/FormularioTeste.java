@@ -1,11 +1,17 @@
 package appium.test;
 
 import appium.core.BaseTest;
+import appium.core.DriverFactory;
 import appium.page.FormularioPage;
 import appium.page.MenuPage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -84,5 +90,22 @@ public class FormularioTeste extends BaseTest {
 
         //O texto que vier do switch terá que terminar com o valor 'Off'
         assertTrue(page.obterSwitchCadastrado().endsWith("Marcado"));
+    }
+
+    @Test
+    public void deveRealizarCadastroDemorado() {
+        //Preencher o campo 'nome'
+        page.escreverNome("Priscila Mayume");
+        DriverFactory.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        //Clicar em salvar
+        page.salvarDemorado();
+//        esperar(6000);
+
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@text='Nome: Priscila Mayume']")));
+
+        //Validações
+        assertEquals("Nome: Priscila Mayume", page.obterNomeCadastrado());
+
     }
 }
