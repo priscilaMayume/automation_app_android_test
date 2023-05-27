@@ -6,9 +6,14 @@ import org.openqa.selenium.By;
 public class AlertasPage extends BasePage {
 
     public void clicarAlertaConfirm() {
-
         //clicar na opção alert confirm
         clicarPorTexto("ALERTA CONFIRM");
+    }
+
+    public void clicarAlertaSimples() {
+        //clicar na opção alerta simples
+        clicarPorTexto("ALERTA SIMPLES");
+
     }
 
     public String obterTituloAlerta() {
@@ -31,5 +36,9 @@ public class AlertasPage extends BasePage {
 
     public void negarAlerta() {
         clicarPorTexto("NEGAR");
+    }
+
+    public void clicarForaCaixa() {
+        tap(100, 150);
     }
 }

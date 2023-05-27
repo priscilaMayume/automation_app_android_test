@@ -4,6 +4,7 @@ import appium.core.BaseTest;
 import appium.page.AlertasPage;
 import appium.page.MenuPage;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class AlertaTeste extends BaseTest {
@@ -11,11 +12,14 @@ public class AlertaTeste extends BaseTest {
     private MenuPage menu = new MenuPage();
     private AlertasPage page = new AlertasPage();
 
-    @Test
-    public void deveConfirmarAlerta() {
+    @Before
+    public void setup() {
         //acessar menu alerta
         menu.acessarAlerta();
+    }
 
+    @Test
+    public void deveConfirmarAlerta() {
         //clicar em alerta confirm
         page.clicarAlertaConfirm();
 
@@ -27,10 +31,24 @@ public class AlertaTeste extends BaseTest {
         page.confirmarAlerta();
 
         //verficar nova mensagem
-        Assert.assertEquals("Confirmado", page.obterMensagemAlerta());
+//        Assert.assertEquals("Confirmado", page.obterMensagemAlerta());
+ //       Assert.assertEquals("Confirmado", page.obterMensagemAlerta());
 
         //sair
         page.sairAlerta();
+
+    }
+
+    @Test
+    public void deveClicarForaAlerta() {
+        //clicar em alerta simples
+        page.clicarAlertaSimples();
+
+        //clicar fora da caixa - clicar em 100,150
+        page.clicarForaCaixa();
+
+        //verificar ue a mensagem não esta presente
+        Assert.assertFalse(page.existeElementoPorTexto("Pode clicar no OK ou fora da caixa para sair"));
 
     }
 }

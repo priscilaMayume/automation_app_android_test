@@ -1,6 +1,8 @@
 package appium.core;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 
 import java.util.List;
@@ -45,5 +47,11 @@ public class BasePage {
     public  boolean existeElementoPorTexto(String texto) {
        List<MobileElement> elemento =  getDriver().findElements(By.xpath("//*[@text='"+texto+"']"));
         return elemento.size() > 0;
+    }
+
+    //ação de toque na tela quando não tem nenhum elemento
+    public void tap(int x,int y) {
+       // new TouchAction(getDriver()).press(PointOption.point(x, y)).perform();
+        new TouchAction(getDriver()).tap(PointOption.point(x, y)).perform();
     }
 }

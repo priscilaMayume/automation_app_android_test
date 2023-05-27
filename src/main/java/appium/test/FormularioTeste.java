@@ -4,6 +4,7 @@ import appium.core.BaseTest;
 import appium.core.DriverFactory;
 import appium.page.FormularioPage;
 import appium.page.MenuPage;
+import io.appium.java_client.MobileBy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -106,6 +107,27 @@ public class FormularioTeste extends BaseTest {
 
         //Validações
         assertEquals("Nome: Priscila Mayume", page.obterNomeCadastrado());
+
+    }
+
+    @Test
+    public void deveAlterarData() {
+        page.clicarPorTexto("01/01/2000");
+        page.clicarPorTexto("20");
+        page.clicarPorTexto("OK");
+
+        Assert.assertTrue(page.existeElementoPorTexto("20/2/2000"));
+
+    }
+
+    @Test
+    public void deveAlterarHora() {
+        page.clicarPorTexto("06:00");
+        page.clicar(MobileBy.AccessibilityId("10"));
+        page.clicar(MobileBy.AccessibilityId("40"));
+        page.clicarPorTexto("OK");
+
+        Assert.assertTrue(page.existeElementoPorTexto("10:40"));
 
     }
 }
