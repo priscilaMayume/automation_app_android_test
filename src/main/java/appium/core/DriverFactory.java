@@ -27,7 +27,7 @@ public class DriverFactory {
         desiredCapabilities.setCapability("deviceName", "android_appium");
         desiredCapabilities.setCapability("automationName", "uiautomator2");
         //instalar APK
-        desiredCapabilities.setCapability(MobileCapabilityType.APP, "/home/local/CONDUCTOR/priscila.hirotsu/Documentos/projetos/PESSOAL/myApp/src/main/resources/CTAppium_1_2.apk");
+        desiredCapabilities.setCapability(MobileCapabilityType.APP, "/home/local/REVISAR-PATH/priscila.hirotsu/Documentos/projetos/PESSOAL/myApp/src/main/resources/CTAppium_1_2.apk");
 
         //driver de conexão e inicializar
         try {
